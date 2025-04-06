@@ -1,0 +1,590 @@
+[
+    {
+        "id": "44070c6506296a12",
+        "type": "tab",
+        "label": "GPSFinal",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fd919bc4c7af9d14",
+        "type": "websocket in",
+        "z": "44070c6506296a12",
+        "name": "",
+        "server": "f01c35466a7eca09",
+        "client": "",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "c4fd0a43bebc434a",
+                "c1ad1ee87fa0adb0",
+                "7be044da0e513886"
+            ]
+        ]
+    },
+    {
+        "id": "c4fd0a43bebc434a",
+        "type": "debug",
+        "z": "44070c6506296a12",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "2b7cb48929073b04",
+        "type": "file",
+        "z": "44070c6506296a12",
+        "name": "",
+        "filename": "C:\\Users\\Thomas Bogaerts\\Documents\\Temp\\fileDumpJson.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1090,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7be044da0e513886",
+        "type": "function",
+        "z": "44070c6506296a12",
+        "name": "parsing data from ESP",
+        "func": "msg.Dataset.forEach(function(element)\n{\n    var reducedData = {};\n\n    reducedData.name = \"test\";\n    reducedData.lon = element.Longitude;\n    reducedData.lat = element.Latitude;\n    reducedData.speed = element.Speed;\n\n    var newMsg = {};\n    newMsg.payload = reducedData;\n\n    node.send(newMsg);  \n});\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 240,
+        "wires": [
+            [
+                "2b7cb48929073b04",
+                "25f6af02903cfab0"
+            ]
+        ]
+    },
+    {
+        "id": "25f6af02903cfab0",
+        "type": "debug",
+        "z": "44070c6506296a12",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "dd9c2943fedd7ae3",
+        "type": "file in",
+        "z": "44070c6506296a12",
+        "name": "",
+        "filename": "C:\\Users\\Thomas Bogaerts\\Documents\\Temp\\fileDumpJson.txt",
+        "filenameType": "str",
+        "format": "lines",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "aec6e013283446ca",
+                "77e6bf6889584867"
+            ]
+        ]
+    },
+    {
+        "id": "d77e25fb38ed514c",
+        "type": "ui_button",
+        "z": "44070c6506296a12",
+        "name": "",
+        "group": "5d24b4bd0d84bf2c",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Load data",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 200,
+        "y": 420,
+        "wires": [
+            [
+                "dd9c2943fedd7ae3",
+                "c666444377449615"
+            ]
+        ]
+    },
+    {
+        "id": "58a15c0bfd76759e",
+        "type": "ui_worldmap",
+        "z": "44070c6506296a12",
+        "group": "13e907a2c3e2416b",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "hide",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 860,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "aec6e013283446ca",
+        "type": "debug",
+        "z": "44070c6506296a12",
+        "name": "debug 24",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "77e6bf6889584867",
+        "type": "json",
+        "z": "44070c6506296a12",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 910,
+        "y": 440,
+        "wires": [
+            [
+                "8214b026fcae511c"
+            ]
+        ]
+    },
+    {
+        "id": "8214b026fcae511c",
+        "type": "function",
+        "z": "44070c6506296a12",
+        "name": "queueing",
+        "func": "var routeDataBuffer = global.get(\"routeDataBuffer\");\n\nrouteDataBuffer.push(msg.payload);\n\nglobal.set(\"routeDataBufferr\", routeDataBuffer);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "456cde1621dfa931",
+        "type": "ui_button",
+        "z": "44070c6506296a12",
+        "name": "",
+        "group": "5d24b4bd0d84bf2c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "play",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 410,
+        "y": 500,
+        "wires": [
+            [
+                "b2b76d646fc4e12d"
+            ]
+        ]
+    },
+    {
+        "id": "d4b2034d2840d031",
+        "type": "ui_button",
+        "z": "44070c6506296a12",
+        "name": "",
+        "group": "5d24b4bd0d84bf2c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "pause",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 410,
+        "y": 580,
+        "wires": [
+            [
+                "b2b76d646fc4e12d"
+            ]
+        ]
+    },
+    {
+        "id": "b2b76d646fc4e12d",
+        "type": "function",
+        "z": "44070c6506296a12",
+        "name": "function 15",
+        "func": "if(msg.payload){\n    global.set(\"playRoute\", true);\n    updateData();\n}\nelse{\n    global.set(\"playRoute\", false);\n}\n\nfunction updateData(){\n    if(global.get(\"playRoute\")){\n        var routeData = global.get(\"routeData\");\n        var routeDataBuffer = global.get(\"routeDataBuffer\");\n        if (routeDataBuffer.length > 0){\n            var newPoint = routeDataBuffer.shift();\n            routeData.line.push(newPoint);\n            global.set(\"routeData\", routeData);\n            global.set(\"routeDataBuffer\", routeDataBuffer);\n\n            let newMsg = {};\n            newMsg.payload = routeData;\n            node.send(newMsg);\n            updateMarker(newPoint.lon, newPoint.lat, newPoint.speed);\n            zoomMap(newPoint.lon, newPoint.lat);\n\n            setTimeout(updateData, 1000);\n        }\n        \n    }\n}\n\nfunction updateMarker(lon, lat, speed){\n    var markerData = global.get(\"markerData\"); //hoeft geen global te zijn\n    markerData.lon = lon;\n    markerData.lat = lat;\n    markerData.iconColor = setColor(speed);\n    \n    var newMsg = {};\n    newMsg.payload = markerData;\n    node.send(newMsg);\n\n    \n}\n\nfunction zoomMap(lon, lat){\n    var zoomData = {};\n    var command = {\n        lat: lat,\n        lon: lon,\n        zoom: 15\n    };\n    zoomData.command = command;\n        \n    var zoomMsg = {};\n    zoomMsg.payload = zoomData;\n    node.send(zoomMsg);\n}\n\nfunction setColor(speed){\n    if(speed < 20){\n        return \"green\";\n    }\n    if(speed < 40){\n        return \"blue\";\n    }\n\n    return \"red\";\n    \n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 540,
+        "wires": [
+            [
+                "58a15c0bfd76759e",
+                "0786528039f8ea1d"
+            ]
+        ]
+    },
+    {
+        "id": "d7819064d48b4b05",
+        "type": "inject",
+        "z": "44070c6506296a12",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 210,
+        "y": 760,
+        "wires": [
+            [
+                "c666444377449615"
+            ]
+        ]
+    },
+    {
+        "id": "c666444377449615",
+        "type": "function",
+        "z": "44070c6506296a12",
+        "name": "initFunction",
+        "func": "var routeData = {};\n\nrouteData.name = \"Testroute\";\nrouteData.line = [];\n\nglobal.set(\"routeData\", routeData);\n\nvar routeDataBuffer = [];\nglobal.set(\"routeDataBuffer\", routeDataBuffer);\n\nvar markerData = {};\n\nmarkerData.name = \"EndMarker\";\nmarkerData.lon = 0.0;\nmarkerData.lat = 0.0;\n\nglobal.set(\"markerData\", markerData);\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c1ad1ee87fa0adb0",
+        "type": "file",
+        "z": "44070c6506296a12",
+        "name": "",
+        "filename": "C:\\Users\\Thomas Bogaerts\\Documents\\Temp\\debugDump.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 600,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c5ed8d8d790b566",
+        "type": "ui_button",
+        "z": "44070c6506296a12",
+        "name": "",
+        "group": "5d24b4bd0d84bf2c",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Draw full route",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 440,
+        "y": 660,
+        "wires": [
+            [
+                "fecf4608d0138912"
+            ]
+        ]
+    },
+    {
+        "id": "fecf4608d0138912",
+        "type": "function",
+        "z": "44070c6506296a12",
+        "name": "function 17",
+        "func": "var routeDataBuffer = global.get(\"routeDataBuffer\");\nvar routeData = global.get(\"routeData\");\n\nzoomMap(routeDataBuffer[0].lon, routeDataBuffer[0].lat)\n\nrouteData.line = routeDataBuffer;\n\nvar newMsg = {};\nnewMsg.payload = routeData;\n\nreturn newMsg;\n\nfunction zoomMap(lon, lat) {\n    var zoomData = {};\n    var command = {\n        lat: lat,\n        lon: lon,\n        zoom: 15\n    };\n    zoomData.command = command;\n\n    var zoomMsg = {};\n    zoomMsg.payload = zoomData;\n    node.send(zoomMsg);\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 660,
+        "wires": [
+            [
+                "58a15c0bfd76759e",
+                "8b7325cd949baa63"
+            ]
+        ]
+    },
+    {
+        "id": "0786528039f8ea1d",
+        "type": "debug",
+        "z": "44070c6506296a12",
+        "name": "debug 27",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "8b7325cd949baa63",
+        "type": "debug",
+        "z": "44070c6506296a12",
+        "name": "debug 28",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "d449a58c23a199a7",
+        "type": "ui_button",
+        "z": "44070c6506296a12",
+        "name": "",
+        "group": "7f3ebb9f56375516",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Upload tracking data",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "U",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 220,
+        "y": 840,
+        "wires": [
+            [
+                "bce7355b121fbdd4",
+                "9c11558804eb54e9"
+            ]
+        ]
+    },
+    {
+        "id": "bce7355b121fbdd4",
+        "type": "websocket out",
+        "z": "44070c6506296a12",
+        "name": "",
+        "server": "f01c35466a7eca09",
+        "client": "",
+        "x": 730,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "f635180b964d9b93",
+        "type": "ui_button",
+        "z": "44070c6506296a12",
+        "name": "",
+        "group": "7f3ebb9f56375516",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Delete tracking data",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 240,
+        "y": 900,
+        "wires": [
+            [
+                "bce7355b121fbdd4",
+                "9c11558804eb54e9"
+            ]
+        ]
+    },
+    {
+        "id": "9c11558804eb54e9",
+        "type": "debug",
+        "z": "44070c6506296a12",
+        "name": "debug 29",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "f01c35466a7eca09",
+        "type": "websocket-listener",
+        "path": "/ws/example",
+        "wholemsg": "true"
+    },
+    {
+        "id": "5d24b4bd0d84bf2c",
+        "type": "ui_group",
+        "name": "Buttons",
+        "tab": "fd50ee1b23ad95af",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "13e907a2c3e2416b",
+        "type": "ui_group",
+        "name": "WorldMap",
+        "tab": "fd50ee1b23ad95af",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7f3ebb9f56375516",
+        "type": "ui_group",
+        "name": "EspControls",
+        "tab": "fd50ee1b23ad95af",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fd50ee1b23ad95af",
+        "type": "ui_tab",
+        "name": "TestWorldMap",
+        "icon": "dashboard",
+        "order": 6,
+        "disabled": false,
+        "hidden": false
+    }
+]

@@ -35,7 +35,7 @@ void onWebSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
       StaticJsonDocument<256> doc;
       DeserializationError error = deserializeJson(doc, payload);
       // Extract command value
-      String command = String(doc["payload"]["command"]);
+      String command = String(doc["payload"]);
 
       Serial.println("command is: " + String(command));
 
