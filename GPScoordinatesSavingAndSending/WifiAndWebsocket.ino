@@ -35,35 +35,18 @@ void onWebSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
       StaticJsonDocument<256> doc;
       DeserializationError error = deserializeJson(doc, payload);
       // Extract command value
-      command = doc["payload"]["command"];
-
-      //processWebsocketCommand(command);
+      String command = String(doc["payload"]["command"]);
 
       Serial.println("command is: " + String(command));
+
+      handleWebsocketCommand(command);
 
       break;
   }
 }
 
-void sendModemResponseOverWebsocket(){
-  if(received != ""){
-    Serial.println("Response from modem:");
-    webSocket.sendTXT(received);
-    handleCommand(received);
-    received = "";
-  }
-}
+void handleWebsocketCommand(String command){
 
-
-//todo: this can improve
-void handleCommand(String msgToHandle){
-  //Serial.print("received string to handle:");Serial.println(msgToHandle);
-  if(msgToHandle.indexOf("+CGNSINF:") != -1){
-    Serial.println("GNSS data received");
-    msgToHandle = msgToHandle.substring(msgToHandle.indexOf("+CGNSINF:"), msgToHandle.indexOf("\r\n\r"));
-    Serial.println(msgToHandle);
-    Serial.println(parseCGNSINF(msgToHandle));
-  }
 }
 
 void publishGpsData(){

@@ -10,10 +10,9 @@ void IOSetup(){
 void manageProcess(){
   static unsigned long lastPoll;
 
-  executeWebsocketCommand();
   received = readModem();
 
-  handleCommand(received);
+  handleModemResponse(received);
 
   if (millis() - lastPoll > 15000) {
     Serial.println("polling GPS");

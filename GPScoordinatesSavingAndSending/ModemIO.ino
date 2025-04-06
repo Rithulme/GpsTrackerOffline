@@ -3,12 +3,10 @@ String readModem(){
   bool lf = false;
   while (Serial2.available()) {
     byte byteUart = Serial2.read();
-    printByteAsAscii(byteUart); //use this to visually print carriage-return and linefeed characters
-    //Serial.print((char)byteUart);
+    //printByteAsAscii(byteUart); //use this to visually print carriage-return and linefeed characters
+    
     msg += (char)byteUart; //typecast byte to char
-    if(byteUart == '\n'){
-      //Serial.print("Received from modem: ");
-      //Serial.println(msg);
+    if(byteUart == '\n'){      
       lf = true;
     }
   }
@@ -27,7 +25,17 @@ void printByteAsAscii(byte inputByte) { //used to display CarriageReturn and Lin
     }
 }
 
-bool sendModem(String ATcomm, String returnMsg){
+//todo: this can improve
+void handleModemResponse(String msgToHandle){
+  if(msgToHandle.indexOf("+CGNSINF:") != -1){
+    Serial.println("GNSS data received");
+    msgToHandle = msgToHandle.substring(msgToHandle.indexOf("+CGNSINF:"), msgToHandle.indexOf("\r\n\r"));
+    Serial.println(msgToHandle);
+    Serial.println(parseCGNSINF(msgToHandle));
+  }
+}
+
+bool sendModemAndProcessResponse(String ATcomm, String returnMsg){
   Serial.print("Sending AT command:");Serial.println(ATcomm);
   int retries=0;
   String receivedMsg = "";
@@ -48,15 +56,5 @@ bool sendModem(String ATcomm, String returnMsg){
   } else {
     Serial.print(returnMsg);Serial.print(" found in return after sending command: ");Serial.print(ATcomm),Serial.println(" succesful, all done!");
     return true;
-  }
-}
-
-void executeWebsocketCommand()
-{
-  if(command != ""){
-    Serial.println("Command received from WS or Serial:");
-    Serial.println(command);
-    Serial2.println(command);
-    command = "";
   }
 }

@@ -23,7 +23,6 @@ const int PWR_PIN = 4;
 
 // WebSocket client
 WebSocketsClient webSocket;
-const char* command ="";
 bool commandOk = false;
 String received="";
 

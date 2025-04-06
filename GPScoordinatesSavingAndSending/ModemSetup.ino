@@ -99,7 +99,7 @@ void ManageModemState(){
         if (previousState != mainState) {
           previousState = mainState;
           previousStep = millis();
-          commandOk = sendModem("AT+CGNSPWR=1","OK");
+          commandOk = sendModemAndProcessResponse("AT+CGNSPWR=1","OK");
           Serial.println("at state 5");
         }       
         
@@ -117,7 +117,7 @@ void ManageModemState(){
         if (previousState != mainState) {
           previousState = mainState;
           previousStep = millis();
-          commandOk = sendModem("AT+SGPIO=0,4,1,1","OK");
+          commandOk = sendModemAndProcessResponse("AT+SGPIO=0,4,1,1","OK");
           Serial.println("at state 6");
         }       
         
