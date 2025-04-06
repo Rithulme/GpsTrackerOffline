@@ -13,12 +13,7 @@ void manageProcess(){
   executeWebsocketCommand();
   received = readModem();
 
-  if (answerViaWebsocket) { //only respond over websocket if command arrived over websocket 
-    sendModemResponseOverWebsocket();
-  }
-  else{
-    handleCommand(received);
-  }
+  handleCommand(received);
 
   if (millis() - lastPoll > 15000) {
     Serial.println("polling GPS");

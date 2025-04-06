@@ -51,13 +51,12 @@ bool sendModem(String ATcomm, String returnMsg){
   }
 }
 
-// void executeWebsocketCommand()
-// {
-//   if(command != ""){
-//     Serial.println("Command received from WS or Serial:");
-//     Serial.println(command);
-//     Serial2.println(command);
-//     answerViaWebsocket = true;
-//     command = "";
-//   }
-// }
+void executeWebsocketCommand()
+{
+  if(command != ""){
+    Serial.println("Command received from WS or Serial:");
+    Serial.println(command);
+    Serial2.println(command);
+    command = "";
+  }
+}

@@ -1,5 +1,3 @@
-
-
 void setupWifiAndWebsocket(){
   const char* websocket_server = "192.168.0.182";
   const char* websocket_path = "/ws/example";
@@ -53,7 +51,6 @@ void sendModemResponseOverWebsocket(){
     webSocket.sendTXT(received);
     handleCommand(received);
     received = "";
-    answerViaWebsocket = false;
   }
 }
 

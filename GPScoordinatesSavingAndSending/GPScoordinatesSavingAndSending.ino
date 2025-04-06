@@ -33,7 +33,6 @@ int blinkTime = 250;
 int mainState = 0;
 bool gpsPolling = false;
 bool correctPosition = false;
-bool answerViaWebsocket = false;
 
 void setup() {
   Serial.begin(115200);
@@ -55,7 +54,6 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   IOSetup();
-
 }
 
 void loop() {
