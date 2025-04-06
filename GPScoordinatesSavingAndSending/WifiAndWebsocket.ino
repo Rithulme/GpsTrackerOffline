@@ -46,7 +46,15 @@ void onWebSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
 }
 
 void handleWebsocketCommand(String command){
-
+  if (command == "U") {
+    publishGpsData();
+  }
+  else if (command == "D") {
+    clearData();
+  }
+  else {
+    Serial.println("Unknown command");
+  }
 }
 
 void publishGpsData(){
